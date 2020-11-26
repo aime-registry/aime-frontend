@@ -1,0 +1,101 @@
+<div id="wrapper">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" routerLink="/">
+        <img src="/assets/logo/aime.png" height="28">
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain" [ngClass]="{'is-active': navbarToggle}" (click)="navbarToggle = !navbarToggle">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarMain" class="navbar-menu" [ngClass]="{'is-active': navbarToggle}">
+      <div class="navbar-start">
+        <a [routerLink]="['/']" class="navbar-item" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{exact: true}">
+          <span class="icon">
+            <i class="fad fa-home" aria-hidden="true"></i>
+          </span>
+          <span>
+            Start
+          </span>
+        </a>
+        <a [routerLink]="['/questionnaire']" class="navbar-item" [routerLinkActive]="['is-active']">
+          <span class="icon">
+            <i class="fad fa-file-edit"></i>
+          </span>
+          <span>
+            New report
+          </span>
+        </a>
+				<a [routerLink]="['/database']" class="navbar-item" [routerLinkActive]="['is-active']">
+          <span class="icon">
+            <i class="fad fa-database"></i>
+          </span>
+					<span>
+            Database
+          </span>
+				</a>
+      </div>
+			<div class="navbar-end">
+				<a [routerLink]="['/specification']" class="navbar-item" [routerLinkActive]="['is-active']">
+          <span class="icon">
+            <i class="fad fa-file-certificate"></i>
+          </span>
+					<span>
+            Specification
+          </span>
+				</a>
+				<a [routerLink]="['/contribute']" class="navbar-item" [routerLinkActive]="['is-active']">
+          <span class="icon">
+            <i class="fad fa-comment-lines"></i>
+          </span>
+					<span>
+            Contribute
+          </span>
+				</a>
+				<a [routerLink]="['/about']" class="navbar-item" [routerLinkActive]="['is-active']">
+          <span class="icon">
+            <i class="fad fa-info-square"></i>
+          </span>
+					<span>
+            About AIMe
+          </span>
+				</a>
+			</div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <img src="/assets/logo/aime.png" style="height: 42px">
+    </p>
+    <p>
+      <a href="https://aime-registry.org">aime-registry.org</a>
+    </p>
+    <p>
+      <a [routerLink]="['/about']">
+        <span class="is-icon">
+          <i class="fa fa-info-square"></i>
+        </span>
+        <span>
+          About AIMe
+        </span>
+      </a>
+			<a [routerLink]="['/legal-notice']" class="ml-5">
+        <span class="is-icon">
+          <i class="fa fa-balance-scale"></i>
+        </span>
+				<span>
+          Legal notice
+        </span>
+			</a>
+    </p>
+  </div>
+</footer>

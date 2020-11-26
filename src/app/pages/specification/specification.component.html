@@ -1,0 +1,99 @@
+<section class="section">
+	<div class="container">
+		<h1 class="title is-3">AIMe specification</h1>
+		<div class="field">
+			<div class="control">
+				<div class="select is-rounded">
+					<select id="version">
+						<option>AIMe 2021.0</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="card mt-3">
+			<header class="card-header">
+				<div class="card-header-title">
+					<h2 class="title is-4">
+						Question tree
+					</h2>
+				</div>
+				<a class="card-header-icon" (click)="showTree = !showTree">
+					<span class="icon">
+						<i class="fas fa-angle-down" *ngIf="showTree"></i>
+						<i class="fas fa-angle-left" *ngIf="!showTree"></i>
+					</span>
+				</a>
+			</header>
+			<div class="card-content" *ngIf="showTree">
+				<div class="tree">
+					<app-qu-tree [id]="[]" [question]="questions" [hideNode]="true"></app-qu-tree>
+				</div>
+				<p class="mb-1">
+					Legend
+				</p>
+				<div class="tags">
+					<span class="tag is-small is-light is-primary" title="Conditional">
+						<span class="icon"><i class="far fa-code-branch fa-rotate-180 fa-flip-vertical"></i></span>
+						<span>Conditional</span>
+					</span>
+					<span class="tag is-small is-light">
+						<span class="icon"><i class="far fa-dot-circle"></i></span>
+						<span>Radio selection</span>
+					</span>
+					<span class="tag is-small is-light">
+						<span class="icon"><i class="far fa-chevron-circle-down"></i></span>
+						<span>Dropdown selection</span>
+					</span>
+					<span  class="tag is-small is-light">
+						<span class="icon"><i class="far fa-check-double"></i></span>
+						<span>Checkboxes</span>
+					</span>
+					<span class="tag is-small is-light">
+						<span class="icon"><i class="far fa-tags"></i></span>
+						<span>Tags</span>
+					</span>
+					<span class="tag is-small is-light">
+						<span class="icon"><i class="far fa-file"></i></span>
+						<span>File</span>
+					</span>
+					<span class="tag is-small is-light is-info">
+						<span class="icon"><i class="fa fa-star-half-alt"></i></span>
+						<span>Affects reproducibility score</span>
+					</span>
+					<span class="tag is-small is-light is-warning">
+						<span class="icon"><i class="fa fa-star-half-alt"></i></span>
+						<span>Affects validation score</span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="card mt-5">
+			<header class="card-header">
+				<div class="card-header-title">
+					<h2 class="title is-4">
+						YAML file
+					</h2>
+				</div>
+				<a class="card-header-icon" (click)="showSpec = !showSpec">
+					<span class="icon">
+						<i class="fas fa-angle-down" *ngIf="showSpec"></i>
+						<i class="fas fa-angle-left" *ngIf="!showSpec"></i>
+					</span>
+				</a>
+			</header>
+			<div class="card-content" *ngIf="showSpec">
+				<div style="height: 500px">
+					<ngx-monaco-editor style="height: 100%" [options]="{language: 'yaml', readOnly: true}" [(ngModel)]="yamlSpec"></ngx-monaco-editor>
+				</div>
+			</div>
+			<footer class="card-footer" *ngIf="showSpec">
+				<a href="/assets/questionnaire.yaml" class="card-footer-item" download>
+					<span class="icon"><i class="fa fa-download"></i></span>
+					<span>Download</span>
+				</a>
+			</footer>
+		</div>
+	</div>
+</section>

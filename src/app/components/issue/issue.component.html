@@ -1,0 +1,30 @@
+<div>
+	<div class="issue-field">
+		<a [routerLink]="['/report', issue.reportId]">
+			<span class="tag is-aime">
+				<i class="fal fa-file-certificate"></i>
+				Report {{issue.reportId}}
+			</span>
+		</a>
+		<ng-container *ngIf="issue.field">
+			/
+			<span class="tag is-aime" *ngIf="issue.field">
+				<i class="fal fa-edit"></i>
+				{{issue.field.join('.')}}
+			</span>
+		</ng-container>
+		raised by
+		<span class="tag is-aime">
+			<i class="fal fa-user"></i>
+			{{issue.name}}
+		</span>
+		on
+		<span class="tag is-aime">
+			<i class="fal fa-clock"></i>
+			{{issue.createdAt | date: 'short'}}
+		</span>
+	</div>
+	<div class="issue-field mt-3">
+		<div class="tag is-aime is-medium">{{issue.content}}</div>
+	</div>
+</div>

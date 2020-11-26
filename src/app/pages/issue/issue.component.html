@@ -1,0 +1,63 @@
+<section class="section">
+	<div class="container">
+		<div>
+			<h2 class="title is-4">Issue {{reportId}} #{{issueId}}</h2>
+			<app-issue [issue]="issue"></app-issue>
+		</div>
+		<div class="mt-5" *ngIf="confirm && !issue.confirmed">
+			<div class="notification is-warning is-light">
+				<strong><i class="fa fa-pause"></i></strong>
+				This issue has not been created yet.
+				Please confirm it by clicking <span class="tag is-success">Confirm</span> below.
+			</div>
+			<div>
+				<button class="button is-success" (click)="confirmIssue()">Confirm</button>
+			</div>
+		</div>
+		<div class="mt-5" *ngIf="issue.confirmed && issue.pending">
+			<div class="notification is-warning is-light">
+				<strong><i class="fa fa-eye-slash"></i></strong>
+				This issue is not publicly visible yet.
+				It will become visible automatically after {{issue.pendingUntil | date: 'short' }} or if the report author has responded.
+			</div>
+		</div>
+		<div *ngIf="issue.confirmed && issue.answers">
+			<div *ngFor="let a of issue.answers" class="mt-5">
+				<h3 class="title is-5">Response #{{a.id}}</h3>
+				<div class="issue-field mt-3">
+					<span class="tag is-aime" *ngIf="a.owner">
+						<i class="fal fa-user-check"></i>
+						Report author
+					</span>
+					<span class="tag is-aime" *ngIf="!a.owner">
+						<i class="fal fa-user"></i>
+						{{issue.name}}
+					</span>
+					on
+					<span class="tag is-aime">
+						<i class="fal fa-clock"></i>
+						{{a.createdAt | date: 'short'}}
+					</span>
+				</div>
+				<div class="issue-field mt-3">
+					<div class="tag is-aime is-medium">{{a.content}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-5" *ngIf="issue.confirmed && password">
+			<h2 class="title is-4">Respond</h2>
+			<div class="mt-3">
+				<div class="field">
+					<div class="control">
+						<textarea class="input" placeholder="Content of your response" id="response-content" style="height: 100px" [(ngModel)]="responseContent"></textarea>
+					</div>
+				</div>
+			</div>
+			<p class="mt-3 mb-3 help">
+			</p>
+			<div>
+				<button class="button is-success" (click)="respond()">Respond</button>
+			</div>
+		</div>
+	</div>
+</section>

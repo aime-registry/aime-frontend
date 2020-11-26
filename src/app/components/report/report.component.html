@@ -1,0 +1,40 @@
+<article class="message report mt-5 mb-5">
+	<header class="message-header" *ngIf="!id">
+		AIMe report (preview)
+	</header>
+	<header class="message-header" *ngIf="id">
+		AIMe report {{id}}
+		<span *ngIf="revision">Revision #{{revision}}</span>
+	</header>
+
+	<div class="message-body" *ngIf="questionsI && answersI">
+		<app-qu-field
+			[readonly]="true"
+			[id]="[]"
+			[question]="questionsI"
+			[value]="answersI"
+			[interactive]="interactive"
+			(raiseIssue)="raiseIssue.emit($event)">
+		</app-qu-field>
+
+		<div class="field is-horizontal" *ngIf="reproducibilityScore !== undefined && validationScore !== undefined">
+			<div class="field-label is-normal">
+				<label class="label">Scores</label>
+			</div>
+			<div class="field-body">
+				<div class="field">
+					<div class="scores">
+						<div class="progress--circle progress--{{reproducibilityScore}}">
+							<div class="progress__number">{{reproducibilityScore / 10}}</div>
+							<div class="score-title">Reproducibility</div>
+						</div>
+						<div class="progress--circle progress--{{validationScore}}">
+							<div class="progress__number">{{validationScore / 10}}</div>
+							<div class="score-title">Validation</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</article>

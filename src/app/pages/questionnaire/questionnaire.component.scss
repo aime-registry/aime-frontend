@@ -1,0 +1,88 @@
+@import 'variables';
+
+.step-item {
+  cursor: pointer;
+}
+
+code, pre {
+  color: $aime;
+}
+
+.steps-content {
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+.dataset {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.add-form {
+  padding: 30px;
+}
+
+.viewer-wrapper {
+  padding: 15px;
+
+  &.loading {
+    background-color: #f0f0f0;
+  }
+
+  .viewer {
+    height: 800px;
+
+    .invisible {
+      display: none;
+    }
+  }
+}
+
+textarea {
+  height: 72px;
+}
+
+.input {
+  margin-top: 7px;
+}
+
+.incorrect {
+  li {
+    list-style-type: circle;
+    margin-left: 20px;
+    cursor: pointer;
+    color: red;
+
+    strong {
+      color: red;
+    }
+  }
+
+  li:hover {
+    list-style-type: circle;
+    margin-left: 20px;
+    cursor: pointer;
+    color: #ff7d7d;
+
+    strong {
+      color: #ff7d7d;
+    }
+  }
+}
+
+.mobile-nav {
+  width: 100%;
+}
+
+.card.questions {
+	overflow: visible;
+}
+
+.spec {
+
+	.card-content {
+		padding-bottom: 40px;
+	}
+
+	margin-bottom: 40px;
+}

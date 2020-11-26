@@ -1,0 +1,16 @@
+@import 'progress';
+
+.scores {
+	.score-title {
+		text-align: center;
+		position: absolute;
+		bottom: -30px;
+		width: 100%;
+	}
+
+	margin-bottom: 40px;
+}
+
+.message-header {
+	text-align: center;
+}

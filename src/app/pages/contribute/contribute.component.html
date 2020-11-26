@@ -1,0 +1,83 @@
+<section class="hero">
+	<div class="hero-body">
+		<div class="container">
+			<h2 class="title is-4">
+				Help shape the AIMe specification
+			</h2>
+			<p class="mt-3">
+				Everyone who is interested in contributing to the AIMe registry is invited to do so, both in terms of creating
+				reports and improving the specification itself.
+			</p>
+			<p class="mt-3">
+				Each year, the AIMe steering committee reviews all new suggestions and decides which to incorporate into the
+				new specification.
+			</p>
+			<p class="mt-3">
+				If you have a suggestion for the next specification or want to become part of the AIMe steering committee,
+				please use the form below.
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<div class="step-content card">
+			<header class="card-header">
+				<div class="card-header-title">
+					<h2 class="title is-4">
+						Contribute
+					</h2>
+				</div>
+			</header>
+			<div class="card-content">
+				<div class="notification is-light mb-3"
+						 [class.is-success]="messageType === 'success'"
+						 [class.is-danger]="messageType === 'error'"
+						 *ngIf="message">
+					{{message}}
+				</div>
+
+				<p class="mb-3">
+					Before suggesting a question and providing feedback, make sure that you have had a look at the
+					<a routerLink="/specification">current AIMe specification</a> and the
+					manuscript.
+				</p>
+
+				<app-qu-field
+					[id]="[]"
+					[interactive]="false"
+					[question]="questions"
+					[getter]="getter"
+					[(value)]="answers"
+					[validationTrigger]="validationTrigger">
+				</app-qu-field>
+
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label"></label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<div *ngIf="!captchaLoaded">
+								<i class="fa fa-spin fa-spinner"></i> Loading captcha
+							</div>
+							<div id="g-recaptcha"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="field">
+					<div class="control">
+						<button data-nav="next" class="button is-info" (click)="submitSurvey()" [disabled]="!captchaLoaded">
+              <span class="icon">
+                <i class="fa fa-paper-plane"></i>
+              </span>
+							<span>Submit</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

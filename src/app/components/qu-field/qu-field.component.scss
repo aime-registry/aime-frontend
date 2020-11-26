@@ -1,0 +1,44 @@
+@import 'variables';
+
+.help {
+  margin-bottom: 10px;
+
+  a.is-pulled-right {
+    margin-bottom: 10px;
+  }
+
+  &.expanded {
+    margin-bottom: 3px;
+
+    a {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.more-info {
+	margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.tags {
+  margin-bottom: 0;
+}
+
+.field {
+  margin-bottom: .75rem;
+}
+
+textarea {
+  height: 75px;
+}
+
+.dropdown-menu {
+	position: absolute;
+	z-index: 100000;
+}
+
+.badges {
+	display: inline-block;
+	padding-left: 10px;
+}

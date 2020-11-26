@@ -1,0 +1,370 @@
+<section class="section">
+  <div class="container">
+    <div class="content">
+			<h2 class="title is-3">
+				About AIMe
+			</h2>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/aime.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								New promising AI technologies for biomedical applications are suggested almost every day.
+								However, a major hurdle for their application in clinical practice is that practitioners generally do not yet
+								trust these technologies.
+								One reason for this is that AI decisions are often opaque and difficult to explain.
+								The AIMe registry is designed to address this problem by providing authors of new AIs with a means to report
+								their AI models in an explicit and transparent fashion.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://aime-registry.org">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										aime-registry.org
+									</span>
+								</a>
+								<a class="level-item" href="mailto:info@aime-registry.org">
+									<span class="icon is-small">
+										<i class="fas fa-envelope" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										info@aime-registry.org
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-5">
+      Citing the AIMe Registry
+    </h2>
+    <div class="content">
+      <p>
+        If you use AIMe to report an AI that is published in a scientific journal or conference, please cite the
+        following paper:
+      </p>
+      <pre>@article&#123;aime,
+  title=&#123;AIMe registry for artificial intelligence in biomedical research&#125;,
+  year=&#123;2020&#125;,
+&#125;</pre>
+      <p>
+        (will be extended when published)
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<h2 class="title is-5">
+			Steering committee
+		</h2>
+		<div class="content">
+			<p>
+				The AIMe steering committee maintains the AIMe specification and has currently {{members.length}} members.
+			</p>
+			<h3 class="title is-6">Members</h3>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th class="is-hidden-mobile">Institution</th>
+					<th class="is-hidden-mobile">Since version</th>
+				</tr>
+				<tr *ngFor="let m of members">
+					<td>{{m.firstName}} {{m.lastName}}</td>
+					<td class="is-hidden-mobile">{{m.institution}}</td>
+					<td class="is-hidden-mobile">AIMe {{m.version}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<h2 class="title is-5">
+			Funding
+		</h2>
+		<div class="content">
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/featurecloud.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>EU Horizon 2020 programme</strong>
+								<br>
+								This project has received funding from the European Union’s Horizon 2020 research and innovation programme
+								under grant agreement No 826078. This website reflects only the view of the authors and the European Commission
+								is not responsible for any use that may be made of the information it contains.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://featurecloud.eu">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>featurecloud.eu</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<h2 class="title is-5">
+			Technology
+		</h2>
+		<div class="content">
+			<p>
+				AIMe uses up-to-date web technologies to create an optimal user experience.
+			</p>
+			<h6 class="title is-6">Frontend</h6>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/angular.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>Angular</strong> <small> v10.2.1</small>
+								<br>
+								Angular is a web framework for building single-page client applications using HTML and TypeScript.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://angular.io">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										angular.io
+									</span>
+								</a>
+								<a class="level-item" href="https://github.com/angular">
+									<span class="icon is-small">
+										<i class="fab fa-github" aria-hidden="true"></i>
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/typescript.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>TypeScript</strong> <small> v4.0.5</small>
+								<br>
+								TypeScript is a typed superset of JavaScript that compiles to readable, standards-based JavaScript.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://typescriptlang.org/">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										typescriptlang.org
+									</span>
+								</a>
+								<a class="level-item" href="https://github.com/microsoft/TypeScript">
+									<span class="icon is-small">
+										<i class="fab fa-github" aria-hidden="true"></i>
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/bulma.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>Bulma</strong> <small> v0.9.1</small>
+								<br>
+								Bulma is a modern CSS framework based on Flexbox.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://bulma.io">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										bulma.io
+									</span>
+								</a>
+								<a class="level-item" href="https://github.com/jgthms/bulma">
+									<span class="icon is-small">
+										<i class="fab fa-github" aria-hidden="true"></i>
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+			<h6 class="title is-6">Backend</h6>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/golang.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>Go</strong> <small> v1.15.3</small>
+								<br>
+								Go is a native open source programming language for high performance server applications.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://golang.org">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										golang.org
+									</span>
+								</a>
+								<a class="level-item" href="https://github.com/golang/go">
+									<span class="icon is-small">
+										<i class="fab fa-github" aria-hidden="true"></i>
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+			<h6 class="title is-6">Development and deployment</h6>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/gitlab.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>GitLab</strong> <small> v13.5.3</small>
+								<br>
+								GitLab is a DevOps platform built as a single application for all stages of the DevOps lifecycle
+								enabling product, development, QA, security, and operations teams to work concurrently on the same
+								project.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://gitlab.com">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										gitlab.com
+									</span>
+								</a>
+								<a class="level-item" href="https://gitlab.com/gitlab-org/gitlab">
+									<span class="icon is-small">
+										<i class="fab fa-gitlab" aria-hidden="true"></i>
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+			<div class="box">
+				<article class="media">
+					<div class="media-left is-hidden-mobile">
+						<figure class="image is-128x128">
+							<img src="/assets/logo/cloudflare.png">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>Cloudflare</strong>
+								<br>
+								Cloudflare provides various network services and is used by AIMe for caching and to protect itself from
+								DDOS attacks.
+							</p>
+						</div>
+						<nav class="level is-mobile">
+							<div class="level-left">
+								<a class="level-item" href="https://cloudflare.com">
+									<span class="icon is-small">
+										<i class="fas fa-globe" aria-hidden="true"></i>
+									</span>
+									&nbsp;
+									<span>
+										cloudflare.com
+									</span>
+								</a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+</section>

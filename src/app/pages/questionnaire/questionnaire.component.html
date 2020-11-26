@@ -1,0 +1,213 @@
+<section class="section">
+  <div class="container">
+    <div class="steps is-aime" *ngIf="!submitted">
+      <div *ngFor="let s of steps" class="step-item is-active is-hidden-mobile" [ngClass]="{'is-selected': step === s.step}" (click)="goToStep(s.step)">
+        <div class="step-marker"><i class="fad {{s.icon}}"></i></div>
+        <div class="step-details">
+          <p class="step-title">{{s.title}}</p>
+        </div>
+      </div>
+      <div class="step-item is-active is-hidden-mobile" [ngClass]="{'is-selected': step === 6}" (click)="goToStep(6)">
+        <div class="step-marker"><i class="fad fa-check"></i></div>
+        <div class="step-details">
+          <p class="step-title">Review & submit</p>
+        </div>
+      </div>
+      <div class="is-hidden-tablet mobile-nav">
+        <h1 class="title is-4">
+          Questionnaire
+        </h1>
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <div class="select is-fullwidth">
+              <select name="clinical" [ngModel]="step" (ngModelChange)="goToStep($event)">
+                <option [value]="s.step" *ngFor="let s of steps">{{s.title}}</option>
+                <option [value]="6">Review & Submit</option>
+              </select>
+            </div>
+            <p class="help">
+              Questionnaire step.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-content">
+        <div *ngFor="let s of steps" class="step-content card questions" [ngClass]="{'is-active': step === s.step}">
+          <header class="card-header">
+            <div class="card-header-title">
+              <h2 class="title is-4">
+                {{s.title}}
+              </h2>
+            </div>
+          </header>
+          <div class="card-content">
+            <app-qu-field [hideId]="true" [id]="[s.short]" [question]="getSection(s.short)" [(value)]="answers[s.short]" [getter]="getter" (valueChange)="handleAnswerChange()" [validationTrigger]="validationTrigger">
+            </app-qu-field>
+          </div>
+        </div>
+        <div class="step-content card" [ngClass]="{'is-active': step === 6}">
+          <header class="card-header">
+            <div class="card-header-title">
+              <h2 class="title is-4">
+                Review & submit
+              </h2>
+            </div>
+          </header>
+          <div class="card-content" *ngIf="validationErrors.length > 0">
+            <p>
+              The preview report cannot be generated because some of the answers are incorrect or missing:
+            </p>
+            <br>
+            <ul class="incorrect">
+              <li *ngFor="let field of validationErrors" (click)="goToField(field.id)">
+								<strong>{{field.id}}</strong> - {{field.msg}}
+							</li>
+            </ul>
+          </div>
+          <div class="card-content" *ngIf="validationErrors.length === 0">
+            <p>
+              Below, you can find a preview report.
+              Review all answers carefully.
+              You can still edit your report later on, but it will create another revision.
+            </p>
+            <p>
+              If you want to correct something, either use the <span class="tag">Previous</span> button below,
+              or click on the according step above.
+            </p>
+
+						<app-report [questions]="questions" [answers]="answers"></app-report>
+
+            <p *ngIf="!revising">
+              If you are done, click the <span class="tag is-info">Submit</span> button below to generate a
+              finalized and referenceable report.
+            </p>
+            <p *ngIf="revising">
+              If you are done, click the <span class="tag is-info">Create Revision</span> button below to update
+              your report and create a new revision.
+            </p>
+            <div *ngIf="!revising">
+              <br>
+              <div class="field">
+                <div class="control">
+                  <input type="email" class="input" [class.is-danger]="!email" [class.is-success]="email" name="email" placeholder="Your email address" [(ngModel)]="email" (focus)="emailChanged = true">
+                </div>
+                <p class="help has-text-left">
+                  Enter an email address to receive the report and admin link.
+                  Make sure that it is a valid address that you have access to, otherwise you will not be able to create revisions later on.
+                </p>
+              </div>
+<!--              <div class="field">-->
+<!--                <div class="control">-->
+<!--                  <label class="checkbox">-->
+<!--                    <input type="checkbox" class="checkbox" name="attachReport" [(ngModel)]="attachReport">-->
+<!--                    Attach report to email-->
+<!--                  </label>-->
+<!--                </div>-->
+<!--              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-actions is-active">
+        <div class="steps-action">
+          <button data-nav="previous" class="button is-normal" (click)="goToStep(step - 1)" *ngIf="step > 1">
+            <span class="icon">
+              <i class="fa fa-arrow-left"></i>
+            </span>
+            <span>Previous</span>
+          </button>
+        </div>
+				<div class="steps-action buttons">
+					<button data-nav="previous" class="button is-normal is-danger is-outlined" (click)="reset()" title="Reset all your answers">
+            <span class="icon">
+              <i class="fa fa-broom"></i>
+            </span>
+						<span>Reset</span>
+					</button>
+				</div>
+        <div class="steps-action">
+          <button data-nav="next" class="button is-success" (click)="goToStep(step + 1)" *ngIf="step < 6">
+            <span>Next</span>
+            <span class="icon">
+              <i class="fa fa-arrow-right"></i>
+            </span>
+          </button>
+          <button data-nav="next" class="button is-info" (click)="submitReport()" *ngIf="step == 6" [disabled]="(!email && !revising) || validationErrors.length > 0">
+            <span class="icon">
+              <i class="fa fa-paper-plane"></i>
+            </span>
+            <span *ngIf="!revising">Submit</span>
+            <span *ngIf="revising">Create Revision</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container" *ngIf="submitted">
+			<div class="notification is-info" *ngIf="!password || !id">
+        <span class="icon has-text-white">
+          <i class="fa fa-spinner fa-spin"></i>
+        </span>
+        Your report is being created...
+      </div>
+
+      <article class="message" *ngIf="password && id">
+        <header class="message-header">
+          <p>
+            Your AIMe report
+          </p>
+        </header>
+        <div class="message-body">
+					<p *ngIf="!revising">
+						Your report <code>aime.report/{{id}}</code> has been generated.
+					</p>
+          <p *ngIf="revising">
+            A new revision for your report <code>aime.report/{{id}}</code> has been generated.
+          </p>
+          <br>
+					<div *ngIf="!revising">
+						<p>
+							URL of your report:<br>
+							<a target="_blank" href="https://aime.report/{{id}}">https://aime.report/{{id}}</a>
+						</p>
+					</div>
+					<div *ngIf="revising">
+						<p>
+							URL for the latest revision of your report:<br>
+							<a target="_blank" href="https://aime.report/{{id}}">https://aime.report/{{id}}</a>
+						</p>
+						<br>
+						<p>
+							URL for this very revision:<br>
+							<a target="_blank" href="https://aime.report/{{id}}/{{version}}">https://aime.report/{{id}}/{{version}}</a>
+						</p>
+					</div>
+					<br>
+          <p>
+						Admin URL to create a new revision:<br>
+            <a target="_blank" href="https://aime-registry.org/questionnaire?id={{id}}&p={{password}}">https://aime-registry.org/questionnaire?id={{id}}&p={{password}}</a>
+          </p>
+          <br>
+          <p>
+            To cite your report, you can use the following BibTeX code:
+          </p>
+					<app-cite-report [id]="id"></app-cite-report>
+          <br>
+          <p>
+            Thank you for using the AIMe registry!
+          </p>
+        </div>
+      </article>
+
+			<div class="has-text-centered">
+				<button (click)="newReport()" class="button is-medium is-success is-rounded">
+					<span class="icon"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+					<span>New report</span>
+				</button>
+			</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+@import 'variables';
+
+$line-color: $aime;
+$line-width: 2px;
+
+$item-height: 30px;
+
+$dist-x: 30px;
+$dist-y: 12px - $line-width / 2;
+
+.node {
+	padding-left: $dist-x;
+	border-left: $line-width solid $line-color;
+	position: relative;
+	top: -$item-height +$dist-y;
+	padding-bottom: $line-width;
+
+	>.inner {
+		position: relative;
+		top: $item-height - $dist-y;
+
+		>.hl {
+			width: $dist-x;
+			border-top: $line-width solid $line-color;
+			position: relative;
+			left: -$dist-x;
+			top: $line-width + $dist-y;
+		}
+	}
+
+	.item {
+		padding-left: $line-width + 10px;
+		min-height: $item-height;
+	}
+
+}
+
+.badges {
+	display: inline-block;
+	padding-left: 10px;
+}

@@ -1,0 +1,25 @@
+@import 'variables';
+
+#wrapper {
+  min-height: calc(100vh - 200px);
+}
+
+footer {
+  height: 200px;
+}
+
+nav {
+  .navbar-item.is-active {
+    background: lightgray;
+  }
+
+  margin-bottom: 25px;
+}
+
+i.fad {
+  --fa-primary-color: #0032B2;
+  --fa-primary-opacity: 1.00;
+
+  --fa-secondary-color: #0032B2;
+  --fa-secondary-opacity: 0.50;
+}

@@ -1,0 +1,140 @@
+<div class="modal is-active" *ngIf="raiseIssue">
+	<div class="modal-background" (click)="raiseIssue = undefined"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title">Raise issue for report {{id}}</p>
+			<button class="delete" aria-label="close" (click)="raiseIssue = undefined"></button>
+		</header>
+		<section class="modal-card-body" *ngIf="!issueSubmitted">
+			<div *ngIf="raiseIssue.question && raiseIssue.value">
+				<div class="mb-2">
+					You are about to raise an issue referring to answer {{raiseIssue.field.join('.')}} of report {{id}}.
+				</div>
+				<app-qu-field [id]="raiseIssue.field" [readonly]="true" [interactive]="false" [question]="raiseIssue.question" [value]="raiseIssue.value">
+				</app-qu-field>
+			</div>
+			<div *ngIf="!raiseIssue.question || !raiseIssue.value">
+				<div>
+					You are about to write a general issue on report {{id}}.
+				</div>
+			</div>
+			<div class="mt-3">
+				<div class="field">
+					<label for="issue-name" class="label">Your name</label>
+					<div class="control">
+						<input class="input" type="text" placeholder="Name" id="issue-name" [(ngModel)]="issueName">
+					</div>
+				</div>
+				<div class="field">
+					<label for="issue-email" class="label">Your email address</label>
+					<div class="control">
+						<input class="input" type="email" placeholder="Email" id="issue-email" [(ngModel)]="issueEmail">
+					</div>
+				</div>
+				<div class="field">
+					<label for="issue-content" class="label">Issue</label>
+					<div class="control">
+						<textarea class="input" placeholder="Content of your issue" id="issue-content" style="height: 100px" [(ngModel)]="issueContent"></textarea>
+					</div>
+				</div>
+			</div>
+			<p class="mt-3 help">
+				After submitting your issue, you will receive an email to verify your email address.
+				Once it has been verified, the author of the report has got two weeks to respond to your issue.
+				After this time, or once the author has responded, your issue will become publicly visible.
+			</p>
+		</section>
+		<section class="modal-card-body" *ngIf="issueSubmitted">
+			<div>
+				Thank you for submitting your issue. Please note that it will not show up before you have verified your
+				email address and the author has responded or two weeks have passed. Please check your mailbox.
+			</div>
+		</section>
+		<footer class="modal-card-foot">
+			<button class="button is-success" *ngIf="!issueSubmitted" [disabled]="!issueName || !issueEmail || !issueContent" (click)="submitComment()">Submit</button>
+			<button class="button" (click)="raiseIssue = undefined">Close</button>
+		</footer>
+	</div>
+</div>
+
+<section class="section">
+	<div class="container" *ngIf="id && answers && questions">
+		<div *ngIf="!error">
+			<app-report
+				[questions]="questions"
+				[answers]="answers"
+				[id]="id"
+				[revision]="revision"
+				[interactive]="true"
+				(raiseIssue)="issueSubmitted = false; raiseIssue = $event">
+			</app-report>
+
+			<article class="message mt-5 mb-5" *ngIf="revisions.length > 1">
+				<header class="message-header">
+					{{revisions.length}} revisions for report {{id}}
+				</header>
+
+				<div class="message-body">
+					<ul class="report-items">
+						<li *ngFor="let rev of revisions">
+							<a [routerLink]="['/report', id, rev.revision]" class="report-item">
+								<span class="tag is-info mr-3">Revision #{{rev.revision}}</span>
+								<span class="report-link">https://aime.report/{{id}}/{{rev.revision}}</span>
+								<span>
+									created at {{rev.createdAt | date: 'short'}}
+								</span>
+								<span *ngIf="rev.revision === revision">
+									(currently displayed)
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</article>
+
+			<article class="message mt-5 mb-5">
+				<header class="message-header">
+					Issues for report {{id}}
+				</header>
+
+				<div class="message-body">
+					<ul class="report-items" *ngIf="issues.length > 0">
+						<li *ngFor="let c of issues">
+							<a [routerLink]="['/report', id, 'issue', c.id]" class="report-item">
+								<span class="tag is-warning mr-3">Issue #{{c.id}}</span>
+								<span>by {{c.name}}</span>
+								<span>
+									created at {{c.createdAt | date: 'short'}}
+								</span>
+								<span *ngIf="c.revisionId !== revision">
+									(refers to revision {{c.revisionId}})
+								</span>
+							</a>
+						</li>
+					</ul>
+					<i *ngIf="issues.length === 0">No reported issues so far.</i>
+
+					<div class="mt-5">
+						<button class="button is-warning is-outlined has-text-grey" (click)="issueSubmitted = false; raiseIssue = {}">
+							<span class="icon"><i class="fa fa-exclamation-triangle"></i></span>
+							<span>Raise an issue</span>
+						</button>
+					</div>
+				</div>
+			</article>
+		</div>
+
+		<div *ngIf="error" class="notification is-danger">
+			<span class="icon"><i class="fas fa-ban"></i></span>
+			<span *ngIf="targetVersion === 0">
+				AIMe report {{id}} could not be found.
+			</span>
+			<span *ngIf="targetVersion > 0">
+				Revision {{targetVersion}} of AIMe report {{id}} could not be found.
+			</span>
+			<p>
+				Try searching the <a [routerLink]="['/database']">AIMe database</a>.
+			</p>
+		</div>
+	</div>
+</section>

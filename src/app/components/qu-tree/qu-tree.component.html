@@ -1,0 +1,63 @@
+<div [class.node]="!hideNode">
+	<div class="inner">
+		<div class="hl"></div>
+		<div *ngIf="question.type !== 'list' && question.type !== 'complex'">
+			<div class="item">
+				<span class="has-text-weight-bold">{{fullId}}</span>
+				<span>&nbsp;-&nbsp;</span>
+				<span>{{question.question}}</span>
+				<span class="badges tags">
+					<span *ngIf="question.condition" class="tag is-small is-light is-primary" title="Conditional">
+						<i class="far fa-code-branch fa-rotate-180 fa-flip-vertical"></i>
+					</span>
+					<span *ngIf="question.type === 'radio'" class="tag is-small is-light" title="Radio selection">
+						<i class="far fa-dot-circle"></i>
+					</span>
+					<span *ngIf="question.type === 'select'" class="tag is-small is-light" title="Dropdown selection">
+						<i class="far fa-chevron-circle-down"></i>
+					</span>
+					<span *ngIf="question.type === 'checkboxes'" class="tag is-small is-light" title="Checkboxes">
+						<i class="far fa-check-double"></i>
+					</span>
+					<span *ngIf="question.type === 'tags'" class="tag is-small is-light" title="Tags">
+						<i class="far fa-tags"></i>
+					</span>
+					<span *ngIf="question.type === 'file'" class="tag is-small is-light" title="File">
+						<i class="far fa-file"></i>
+					</span>
+					<span *ngIf="question.scores?.reproducibility" class="tag is-small is-light is-info" title="Affects reproducibility score">
+						<i class="fa fa-star-half-alt"></i>
+					</span>
+					<span *ngIf="question.scores?.validation" class="tag is-small is-light is-warning" title="Affects validation score">
+						<i class="fa fa-star-half-alt"></i>
+					</span>
+					<span *ngIf="question.optional" class="tag is-small is-light">
+						optional
+					</span>
+				</span>
+			</div>
+		</div>
+		<ng-container *ngIf="question.type === 'list'">
+			<div class="item has-sub" *ngIf="!hideNode">
+				<span class="has-text-weight-bold">{{fullId}}</span>
+				<span>&nbsp;-&nbsp;</span>
+				<span>{{question.title}}</span>
+			</div>
+			<app-qu-tree [id]="appendId('x')" [question]="question.child">
+			</app-qu-tree>
+		</ng-container>
+		<ng-container *ngIf="question.type === 'complex'">
+			<div *ngIf="question.title">
+				<div class="item has-sub">
+					<span class="has-text-weight-bold">{{fullId}}</span>
+					<span>&nbsp;-&nbsp;</span>
+					<span>{{question.title}}</span>
+				</div>
+			</div>
+			<ng-container *ngFor="let s of question.children">
+				<app-qu-tree [id]="appendId(s.id)" [question]="s" [hideNode]="s.type === 'list'">
+				</app-qu-tree>
+			</ng-container>
+		</ng-container>
+	</div>
+</div>

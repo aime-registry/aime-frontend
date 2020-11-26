@@ -1,0 +1,107 @@
+@import 'variables';
+
+@import '~bulma';
+@import '~bulma-steps';
+
+/* You can add global styles to this file, and also import other style files */
+
+.steps.is-aime {
+	.step-item {
+		.step-marker {
+			border-color: $aime;
+			color: $aime;
+		}
+
+		&::before {
+			background: $aime;
+		}
+
+		&.is-selected {
+			.step-marker {
+				background-color: lightgray;
+			}
+		}
+	}
+}
+
+.mb-3 {
+	margin-bottom: 12px;
+}
+
+.hero.is-aime {
+	background-color: $aime;
+	color: #FFF;
+
+	.title {
+		color: #FFF;
+	}
+
+	a.link {
+		color: #999;
+	}
+
+	a.link:hover {
+		color: #FFF;
+	}
+}
+
+.button.is-aime {
+	background-color: $aime;
+	color: #FFF;
+}
+
+.tag.is-aime {
+	background-color: transparent;
+	color: $dark;
+	border: 1px solid $aime;
+	white-space: pre-wrap;
+	height: auto;
+	min-height: 32px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+//
+//.report {
+//	border-radius: 0.25rem;
+//	border: 1px solid rgba(10, 10, 10, 0.2) !important;
+//	box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+//
+//	padding-top: 20px;
+//	padding-bottom: 20px;
+//	margin-top: 20px;
+//	margin-bottom: 20px;
+//
+//	.field {
+//		padding-bottom: 0 !important;
+//		margin-bottom: 0 !important;
+//
+//		.field-body {
+//			padding-bottom: .75rem;
+//			border-left: 3px solid #dddddd !important;
+//			padding-left: 10px;
+//		}
+//	}
+//}
+
+.field-label {
+	.label {
+		position: relative;
+		top: -3px;
+	}
+}
+
+//*::-webkit-scrollbar-track {
+//	-webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+//	background-color: #F5F5F5;
+//}
+//
+//*::-webkit-scrollbar {
+//	width: 10px;
+//	background-color: #F5F5F5;
+//}
+//
+//*::-webkit-scrollbar-thumb {
+//	-webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .3);
+//	background-color: $aime;
+//}

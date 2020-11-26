@@ -1,0 +1,162 @@
+<div class="modal is-active" *ngIf="reportCited">
+  <div class="modal-background" (click)="reportCited = null"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Cite AIMe report {{reportCited.id}}</p>
+      <button class="delete" aria-label="close" (click)="reportCited = null"></button>
+    </header>
+    <section class="modal-card-body">
+			<h2 class="title is-6">Direct link</h2>
+			<pre class="mb-5">https://aime.report/{{reportCited.id}}</pre>
+      <h2 class="title is-6">BibTeX</h2>
+      <app-cite-report [id]="reportCited.id"></app-cite-report>
+      <br>
+      <p>
+        <a routerLink="/about">More information about how to cite the AIMe registry.</a>
+      </p>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" (click)="reportCited = null">Close</button>
+    </footer>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-4">Search the AIMe database</h2>
+
+		<div class="field has-addons">
+			<p class="control has-icons-left is-expanded">
+				<input class="input" type="text" placeholder="Find a report by keywords or id" [ngModel]="query.getValue()" (ngModelChange)="query.next($event)">
+				<span class="icon is-small is-left">
+					<i class="fa fa-search"></i>
+				</span>
+			</p>
+			<p class="control">
+				<span class="select">
+					<select [(ngModel)]="category" (ngModelChange)="search()">
+						<option [value]="''">All</option>
+						<option *ngFor="let k of categories" [value]="k.category">{{k.name}}</option>
+					</select>
+				</span>
+			</p>
+		</div>
+
+    <div class="field search-toolbox">
+      <div class="control">
+        <label class="checkbox" *ngFor="let s of sections">
+          <input type="checkbox" [(ngModel)]="sectionsActivated[s.id]" (ngModelChange)="search()" />
+					{{s.name}}
+        </label>
+      </div>
+    </div>
+
+		<div class="card mb-5">
+			<header class="card-header">
+				<p class="card-header-title">
+					Keywords
+				</p>
+				<a (click)="keywordsExtended = !keywordsExtended" class="card-header-icon" aria-label="more options">
+					<span class="icon">
+						<i class="fas" [class.fa-angle-left]="!keywordsExtended" [class.fa-angle-down]="keywordsExtended" aria-hidden="true"></i>
+					</span>
+				</a>
+			</header>
+			<div class="card-content keywords" *ngIf="keywordsExtended">
+				<div class="content">
+					<div class="field search-toolbox">
+						<div class="control" *ngFor="let k of keywords">
+							<label class="checkbox">
+								<input type="checkbox" [(ngModel)]="keywordsActivated[k.keyword]" (ngModelChange)="search()" />
+								{{k.keyword}} ({{k.count}})
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    <div *ngIf="resultsCount === 0">
+      <div *ngIf="!lastQuery">
+        <i>No database entries yet</i>
+      </div>
+      <div *ngIf="lastQuery">
+        <i>No results found for '{{lastQuery}}'</i>
+      </div>
+    </div>
+
+    <div *ngIf="resultsCount > 0">
+			<div class="card">
+				<header class="card-header">
+					<p class="card-header-title">
+						Results ({{resultsCount}})
+					</p>
+				</header>
+				<div class="card-content">
+					<table class="table is-striped is-fullwidth">
+						<thead>
+						<tr>
+							<th class="w125 is-hidden-mobile">ID</th>
+							<th>Title</th>
+							<th>Author(s)</th>
+							<th class="w175 is-hidden-mobile">Last modified</th>
+							<th class="w100 is-hidden-mobile">Issues</th>
+							<th class="w100"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr *ngFor="let result of results">
+							<td class="is-hidden-mobile">
+								<a [routerLink]="['/report', result.id]">
+									<span class="icon"><i class="fa fa-file-certificate"></i></span>
+									<span>{{result.id}}</span>
+								</a>
+							</td>
+							<td>
+								<a [routerLink]="['/report', result.id]">
+									<strong>
+										{{result.title}}
+									</strong>
+								</a>
+							</td>
+							<td>
+								<a [routerLink]="['/report', result.id]">
+									{{result.authors.join(', ')}}
+								</a>
+							</td>
+							<td class="is-hidden-mobile">
+								{{result.date | date: 'short'}}
+							</td>
+							<td class="is-hidden-mobile">
+								{{result.issues}}
+							</td>
+							<td>
+								<div class="buttons">
+									<button class="button is-small is-success" (click)="reportCited = result">
+                <span class="icon">
+                  <i class="fa fa-feather"></i>
+                </span>
+										<span>
+                  Cite
+                </span>
+									</button>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+
+					<nav class="pagination" role="navigation" aria-label="pagination">
+						<button class="pagination-previous" [disabled]="currentPage <= 0" (click)="setPage(currentPage - 1)">Previous</button>
+						<button class="pagination-next" [disabled]="currentPage >= pages.length - 1" (click)="setPage(currentPage + 1)">Next page</button>
+						<ul class="pagination-list">
+							<li *ngFor="let page of pages">
+								<a class="pagination-link" [ngClass]="{'is-current': currentPage === page}" aria-current="page" (click)="setPage(page)">{{page + 1}}</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+    </div>
+  </div>
+</section>
